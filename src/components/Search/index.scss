@@ -1,0 +1,27 @@
+.search{
+    width: 200px;
+    .search-form{
+        input{
+            background: transparent;
+            color: white;
+            box-shadow: 2px 2px 5px 5px rgb(6, 6, 15);
+            border-radius: 10px;
+            height: 30px;
+            outline: none;
+            caret-color: white;
+        }
+        padding-bottom: 5px;
+    }
+
+    .search-results{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        cursor: pointer;
+        text-align: center;
+        background-color: rgb(6, 6, 15);
+
+        span{
+            font-size: 17px;
+        }
+    }
+}

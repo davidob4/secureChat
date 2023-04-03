@@ -1,0 +1,29 @@
+.chats{
+    
+    .userChat{
+        margin-top: 15px;
+        display: grid;
+        place-items: center;
+
+        p{
+            margin: 0;
+            margin-top: 5px;
+        }
+    }
+
+    .userChatInfo{
+        box-shadow: 2px 2px 5px 5px rgb(6, 6, 15);
+        border-radius: 10px;
+        width: 50%;
+        text-align: center;
+        cursor: pointer;
+        span{
+            font-size: 15px;
+        }
+    }
+
+    p{
+        font-size: 13px;
+        color: gray;
+    }
+}
