@@ -4,7 +4,7 @@ import { ChatContext } from '../../context/ChatContext';
 import React, { useContext, useRef, useEffect, useState } from 'react'
 import bin from "../../assets/bin.png"
 import { db } from '../../firebase';
-import { doc, getDoc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, deleteDoc, updateDoc, serverTimestamp, onSnapshot } from 'firebase/firestore';
 
 
 const Message = ({ message, loaded }) => {
@@ -32,17 +32,50 @@ const Message = ({ message, loaded }) => {
     }
 
     async function handleDelete() {
+        const chatId = data.chatId
         const id = message.id;
         const docRef = doc(db, "chats", data.chatId);
         const docSnap = await getDoc(docRef);
         const messages = docSnap.data().messages;
         const indexToDelete = messages.findIndex((m) => m.id === id);
         if (indexToDelete !== -1) {
-            await deleteDoc(doc(db, "chats", data.chatId, "messages", id));
-            messages.splice(indexToDelete, 1);
-            await updateDoc(docRef, { messages });
+          await deleteDoc(doc(db, "chats", data.chatId, "messages", id));
+          messages.splice(indexToDelete, 1);
+          await updateDoc(docRef, { messages });
+      
+          // Update lastMessage field in userChats for both users
+          const currentUserChatsRef = doc(db, "userChats", currentUser.uid);
+          const currentUserChatsSnap = await getDoc(currentUserChatsRef);
+          const currentUserChatsData = currentUserChatsSnap.data();
+          const otherUserId = data.user.uid;
+          if (currentUserChatsData[chatId]) {
+            const lastMessage = messages.length > 0 ? messages[messages.length - 1] : null;
+            const lastMessageText = lastMessage ? lastMessage.text : null;
+            await updateDoc(currentUserChatsRef, {
+              [chatId + ".lastMessage"]: {
+                text: lastMessageText
+              },
+              [chatId + ".date"]: serverTimestamp()
+            });
+          }
+      
+          const otherUserChatsRef = doc(db, "userChats", otherUserId);
+          const otherUserChatsSnap = await getDoc(otherUserChatsRef);
+          const otherUserChatsData = otherUserChatsSnap.data();
+          if (otherUserChatsData[chatId]) {
+            const lastMessage = messages.length > 0 ? messages[messages.length - 1] : null;
+            const lastMessageText = lastMessage ? lastMessage.text : null;
+            await updateDoc(otherUserChatsRef, {
+                [chatId + ".lastMessage"]: {
+                    text: lastMessageText
+                },
+              [chatId + ".date"]: serverTimestamp()
+            });
+          }
         }
-    }
+      }
+      
+      
 
     return (
         <div ref={ref}
