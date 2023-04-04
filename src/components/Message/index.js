@@ -14,7 +14,7 @@ const Message = ({ message, loaded }) => {
     const ref = useRef();
 
     useEffect(() => {
-        ref.current?.scrollIntoView({ behavior: "smooth" });
+        ref.current?.scrollIntoView();
         if(loaded){
             ref.current.classList.add("loaded");
         }
