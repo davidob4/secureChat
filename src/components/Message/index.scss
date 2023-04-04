@@ -12,7 +12,7 @@
   
   .message .message-content {
     padding-left: 20px;
-    width: 50%;
+    max-width: 50%;
     overflow: hidden;
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -24,6 +24,16 @@
   
   .message.owner {
     flex-direction: row-reverse;
+
+    .bin-owner{
+      display: none;
+    }
+  }
+
+  .message:not(.owner){
+    .bin{
+      display: none;
+    }
   }
   
   .message.owner .message-content {
@@ -33,3 +43,19 @@
     padding-bottom: 0;
     text-align: right;
   }
+
+  .bin,
+  .bin-owner{
+    width: 15px;
+    height: 15px;
+    visibility: hidden;
+    cursor: pointer;
+  }
+
+  .message .message-content:hover img.bin {
+  visibility: visible;
+}
+
+.message:not(.owner) .message-content:hover .bin-owner {
+  visibility: visible; /* show the bin element for recipient's messages */
+}
