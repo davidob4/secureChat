@@ -1,32 +1,35 @@
-.message{
+.message {
     display: flex;
     margin-top: 5px;
     margin-bottom: 5px;
-
-    .you{
-        color: gray;
-        font-size: 11px;
-        margin-top: -5px;
-    }
-
-    .message-content{
-        padding-left: 20px;
-    }
-
-    p{
-        margin: 0;
-    }
-
-    &.owner{
-        flex-direction: row-reverse;
-
-        .message-content{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            padding-left: 0;
-            padding-right: 20px;
-            padding-bottom: 0;
-        }
-    }
-}
+  }
+  
+  .message .you {
+    color: gray;
+    font-size: 11px;
+    margin-top: -5px;
+  }
+  
+  .message .message-content {
+    padding-left: 20px;
+    width: 50%;
+    overflow: hidden;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+  
+  .message p {
+    margin: 0;
+  }
+  
+  .message.owner {
+    flex-direction: row-reverse;
+  }
+  
+  .message.owner .message-content {
+    align-items: flex-end;
+    padding-left: 0;
+    padding-right: 20px;
+    padding-bottom: 0;
+    text-align: right; /* Added this line */
+  }

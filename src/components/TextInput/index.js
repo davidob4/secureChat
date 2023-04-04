@@ -15,34 +15,36 @@ const TextInput = () => {
   const { currentUser } = useContext(AuthContext);
 
   const handleSend = async () => {
-    await updateDoc(doc(db, "chats", data.chatId), {
-      messages: arrayUnion({
-        id: uuid(),
-        text,
-        sendId: currentUser.uid,
-        date: Timestamp.now()
-      })
-    });
-
-    await updateDoc(doc(db, "userChats", currentUser.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text
-      },
-      [data.chatId + ".date"]: serverTimestamp()
-    });
-
-    await updateDoc(doc(db, "userChats", data.user.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text
-      },
-      [data.chatId + ".date"]: serverTimestamp()
-    });
-
-    setText("");
+    if (text.trim() !== "") {
+      await updateDoc(doc(db, "chats", data.chatId), {
+        messages: arrayUnion({
+          id: uuid(),
+          text,
+          sendId: currentUser.uid,
+          date: Timestamp.now()
+        })
+      });
+  
+      await updateDoc(doc(db, "userChats", currentUser.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text
+        },
+        [data.chatId + ".date"]: serverTimestamp()
+      });
+  
+      await updateDoc(doc(db, "userChats", data.user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text
+        },
+        [data.chatId + ".date"]: serverTimestamp()
+      });
+  
+      setText("");
+    }
   }
 
   const handleKeyDown = (e) => {
-    if(e.key === 'Enter') handleSend();
+    if(e.key === 'Enter' && text != "") handleSend();
   }
 
   return (

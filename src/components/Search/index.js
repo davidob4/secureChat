@@ -47,6 +47,7 @@ const Search = () => {
     const handleKey = (e) => {
         e.code === "Enter" && setUser(null);
         e.code === "Enter" && handleSearch();
+
     };
 
     const handleSelect = async (u) => {
