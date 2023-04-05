@@ -88,7 +88,7 @@ const Login = () => {
                 <div class="form-container sign-up-container">
                     <form onSubmit={handleSignup}>
                         <h1>Create Account</h1>
-                        <input type="text" placeholder="Name" />
+                        <input type="text" placeholder="Display Name" maxLength="15"/>
                         <input type="email" placeholder="Email" />
                         <input type="password" placeholder="Password" />
                         <button>Sign Up</button>

@@ -16,5 +16,9 @@
         left: 10px;
         top: 0;
         padding-top: 5px;
+        max-width: 400px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; 
     }
 }

@@ -44,48 +44,42 @@ const Message = ({ message, loaded }) => {
     const docSnap = await getDoc(docRef);
     const messages = docSnap.data().messages;
     const indexToDelete = messages.findIndex((m) => m.id === id);
-
+  
     const updatedMessage = {
       ...messages[indexToDelete],
       text: "this message has been deleted"
     };
-
+  
     if (indexToDelete !== -1) {
       const updatedMessages = [...messages];
       updatedMessages.splice(indexToDelete, 1, updatedMessage);
       await updateDoc(docRef, { messages: updatedMessages });
-
-      // Update lastMessage field in userChats for both users
-      const currentUserChatsRef = doc(db, "userChats", currentUser.uid);
-      const currentUserChatsSnap = await getDoc(currentUserChatsRef);
-      const currentUserChatsData = currentUserChatsSnap.data();
-      const otherUserId = data.user.uid;
-      if (currentUserChatsData[chatId]) {
-        const lastMessage = messages.length > 0 ? messages[messages.length - 1] : null;
-        const lastMessageText = lastMessage ? lastMessage.text : null;
-        await updateDoc(currentUserChatsRef, {
-          [chatId + ".lastMessage"]: {
-            text: lastMessageText
-          },
-          [chatId + ".date"]: serverTimestamp()
-        });
+  
+      async function findLastValidMessage(chatId, messages, userId) {
+        for (let i = messages.length - 1; i >= 0; i--) {
+          if (messages[i].text !== "this message has been deleted" && messages[i].sendId === userId) {
+            return messages[i];
+          }
+        }
+        return null;
       }
-
+      
+      const otherUserId = data.user.uid;
       const otherUserChatsRef = doc(db, "userChats", otherUserId);
       const otherUserChatsSnap = await getDoc(otherUserChatsRef);
       const otherUserChatsData = otherUserChatsSnap.data();
       if (otherUserChatsData[chatId]) {
-        const lastMessage = messages.length > 0 ? messages[messages.length - 1] : null;
-        const lastMessageText = lastMessage ? lastMessage.text : null;
+        const lastValidMessage = await findLastValidMessage(chatId, updatedMessages, currentUser.uid);
+        const lastMessageText = lastValidMessage ? lastValidMessage.text : "";
         await updateDoc(otherUserChatsRef, {
-          [chatId + ".lastMessage"]: {
-            text: lastMessageText
-          },
+          [chatId + ".lastMessage.text"]: lastMessageText,
           [chatId + ".date"]: serverTimestamp()
         });
       }
     }
   }
+  
+
 
   return (
     <div ref={ref}
