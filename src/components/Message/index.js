@@ -1,16 +1,15 @@
 import './index.scss';
 import { AuthContext } from '../../context/AuthContext';
 import { ChatContext } from '../../context/ChatContext';
-import React, { useContext, useRef, useEffect, useState } from 'react'
+import React, { useContext, useRef, useEffect } from 'react'
 import bin from "../../assets/bin.png"
 import { db } from '../../firebase';
-import { doc, getDoc, deleteDoc, updateDoc, serverTimestamp, onSnapshot } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 
 
 const Message = ({ message, loaded }) => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
-  const [isDeleted, setIsDeleted] = useState(false);
 
   const ref = useRef();
 
@@ -24,12 +23,12 @@ const Message = ({ message, loaded }) => {
   function formatDateAndTime(timestamp) {
     if (timestamp && timestamp.seconds) { // add check for undefined timestamp
       const date = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000);
-      const year = date.getFullYear();
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
+      //const year = date.getFullYear();
+      //const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      //const day = date.getDate().toString().padStart(2, '0');
       const hours = date.getHours().toString().padStart(2, '0');
       const minutes = date.getMinutes().toString().padStart(2, '0');
-      const seconds = date.getSeconds().toString().padStart(2, '0');
+      //const seconds = date.getSeconds().toString().padStart(2, '0');
       return `${hours}:${minutes}`;
     } else {
       return ''; // return empty string if timestamp is undefined
@@ -37,7 +36,6 @@ const Message = ({ message, loaded }) => {
   }
 
   async function handleDelete() {
-    setIsDeleted(true);
     const chatId = data.chatId
     const id = message.id;
     const docRef = doc(db, "chats", data.chatId);
@@ -86,10 +84,10 @@ const Message = ({ message, loaded }) => {
       className={`message ${message.sendId === currentUser.uid && "owner"}`}
     >
       <div className='message-content'>
-        {(message.text !== "this message has been deleted") &&<p><img className='bin' src={bin} onClick={handleDelete} />{message.text}</p>}
+        {(message.text !== "this message has been deleted") &&<p><img className='bin' src={bin} alt='' onClick={handleDelete} />{message.text}</p>}
         {(message.text === "this message has been deleted") && <i className="deleted-message">{message.text}</i>}
         {(message.sendId === currentUser.uid) && <p className='you'>you {formatDateAndTime(message.date)}</p>}
-        {(message.sendId != currentUser.uid) && <p className='you'>{data.user.displayName} {formatDateAndTime(message.date)}</p>}
+        {(message.sendId !== currentUser.uid) && <p className='you'>{data.user.displayName} {formatDateAndTime(message.date)}</p>}
       </div>
     </div>
   )

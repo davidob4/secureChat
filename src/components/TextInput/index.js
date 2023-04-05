@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './index.scss'
 import sendsvg from '../../assets/send.png';
 import { doc, updateDoc, arrayUnion, Timestamp, serverTimestamp } from 'firebase/firestore';
@@ -37,7 +37,7 @@ const TextInput = () => {
   }
 
   const handleKeyDown = (e) => {
-    if(e.key === 'Enter' && text != "") handleSend();
+    if(e.key === 'Enter' && text !== "") handleSend();
   }
 
   return (
@@ -47,8 +47,9 @@ const TextInput = () => {
         onChange={(e) => setText(e.target.value)}
         onKeyDown={handleKeyDown}
         value={text}
+        maxLength='100'
       />
-      <img className='sendsvg' src={sendsvg} onClick={handleSend} />
+      <img className='sendsvg' src={sendsvg} onClick={handleSend} alt=''/>
     </div>
   )
 }

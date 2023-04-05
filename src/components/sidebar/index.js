@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import './index.scss'
 import { auth } from '../../firebase'
-import { onAuthStateChanged } from 'firebase/auth';
 import { AuthContext } from '../../context/AuthContext';
 import { signOut } from 'firebase/auth'
 import Search from '../Search';

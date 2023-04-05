@@ -1,19 +1,14 @@
 import './index.scss'
-import React, { useContext, useState } from "react";
+import React from "react";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth"
-import { ref } from "firebase/storage"
 import { doc, setDoc } from "firebase/firestore"
-import { auth, storage, db } from "../../firebase"
-import { useNavigate, Link } from "react-router-dom";
+import { auth, db } from "../../firebase"
+import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
-import { ChatContext } from '../../context/ChatContext';
 
 
 const Login = () => {
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const { data } = useContext(ChatContext);
-
 
     const handleButtons = () => {
         const signUpButton = document.getElementById('signUp');
@@ -35,7 +30,6 @@ const Login = () => {
     
 
     const handleSignup = async (e) => {
-        setLoading(true);
         e.preventDefault();
         const displayName = e.target[0].value
         const email = e.target[1].value

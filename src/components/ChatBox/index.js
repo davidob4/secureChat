@@ -1,5 +1,5 @@
 import "./index.scss"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { ChatContext } from '../../context/ChatContext';
 import { AuthContext } from '../../context/AuthContext';
 import TextInput from '../TextInput';
@@ -11,7 +11,7 @@ const Chat = () => {
 
   return (
     <div className='chat'>
-        <span className='chat-username'>{currentUser.uid != data.user.uid && data.user?.displayName}</span>
+        <span className='chat-username'>{currentUser.uid !== data.user.uid && data.user?.displayName}</span>
         {data.user.displayName && <Messages />}
         {data.user.displayName && <TextInput />}
     </div>
