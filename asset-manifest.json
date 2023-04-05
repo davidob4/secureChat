@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/secureChat/static/css/main.61ef1c0e.css",
-    "main.js": "/secureChat/static/js/main.2d9318d8.js",
+    "main.css": "/secureChat/static/css/main.57af31a2.css",
+    "main.js": "/secureChat/static/js/main.fc0e8739.js",
     "static/js/787.cda612ba.chunk.js": "/secureChat/static/js/787.cda612ba.chunk.js",
     "static/media/helvetica-neu.ttf": "/secureChat/static/media/helvetica-neu.8a19678078a6b21c8057.ttf",
     "static/media/send.png": "/secureChat/static/media/send.2670547e6afa94f390fb.png",
@@ -9,12 +9,12 @@
     "static/media/bin.png": "/secureChat/static/media/bin.a0bc1fa4a21de7741280.png",
     "static/media/CoolveticaRg-Regular.woff2": "/secureChat/static/media/CoolveticaRg-Regular.7d1f3b1dd46ad6557a17.woff2",
     "index.html": "/secureChat/index.html",
-    "main.61ef1c0e.css.map": "/secureChat/static/css/main.61ef1c0e.css.map",
-    "main.2d9318d8.js.map": "/secureChat/static/js/main.2d9318d8.js.map",
+    "main.57af31a2.css.map": "/secureChat/static/css/main.57af31a2.css.map",
+    "main.fc0e8739.js.map": "/secureChat/static/js/main.fc0e8739.js.map",
     "787.cda612ba.chunk.js.map": "/secureChat/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.61ef1c0e.css",
-    "static/js/main.2d9318d8.js"
+    "static/css/main.57af31a2.css",
+    "static/js/main.fc0e8739.js"
   ]
 }
