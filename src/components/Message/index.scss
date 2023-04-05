@@ -1,61 +1,63 @@
 .message {
-    display: flex;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  
-  .message .you {
-    color: gray;
-    font-size: 11px;
-    margin-top: -1px;
-  }
-  
-  .message .message-content {
-    padding-left: 20px;
-    max-width: 50%;
-    overflow: hidden;
-    word-wrap: break-word;
-    white-space: pre-wrap;
-  }
-  
-  .message p {
-    margin: 0;
-  }
-  
-  .message.owner {
-    flex-direction: row-reverse;
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
-    .bin-owner{
-      display: none;
-    }
-  }
+.message .you {
+  color: gray;
+  font-size: 11px;
+  margin-top: -1px;
+}
 
-  .message:not(.owner){
-    .bin{
-      display: none;
-    }
-  }
-  
-  .message.owner .message-content {
-    align-items: flex-end;
-    padding-left: 0;
-    padding-right: 20px;
-    padding-bottom: 0;
-    text-align: right;
-  }
+.message .message-content {
+  padding-left: 20px;
+  max-width: 50%;
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
 
-  .bin,
-  .bin-owner{
-    width: 15px;
-    height: 15px;
-    visibility: hidden;
-    cursor: pointer;
-  }
+.message p {
+  margin: 0;
+}
 
-  .message .message-content:hover img.bin {
+.message.owner {
+  flex-direction: row-reverse;
+
+  .bin-owner {
+    display: none;
+  }
+}
+
+.message:not(.owner) {
+  .bin {
+    display: none;
+  }
+}
+
+.message.owner .message-content {
+  align-items: flex-end;
+  padding-left: 0;
+  padding-right: 20px;
+  padding-bottom: 0;
+  text-align: right;
+}
+
+.bin,
+.bin-owner {
+  width: 15px;
+  height: 15px;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.message .message-content:hover img.bin {
   visibility: visible;
 }
 
-.message:not(.owner) .message-content:hover .bin-owner {
-  visibility: visible; /* show the bin element for recipient's messages */
+.deleted-message {
+  color: gray;
+  opacity: 0.7;
+  font-size: 12px;
 }

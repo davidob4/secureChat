@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/secureChat/static/css/main.37a2838d.css",
-    "main.js": "/secureChat/static/js/main.73d6306e.js",
+    "main.js": "/secureChat/static/js/main.b35ee618.js",
     "static/js/787.cda612ba.chunk.js": "/secureChat/static/js/787.cda612ba.chunk.js",
     "static/media/helvetica-neu.ttf": "/secureChat/static/media/helvetica-neu.8a19678078a6b21c8057.ttf",
     "static/media/send.png": "/secureChat/static/media/send.2670547e6afa94f390fb.png",
@@ -10,11 +10,11 @@
     "static/media/CoolveticaRg-Regular.woff2": "/secureChat/static/media/CoolveticaRg-Regular.7d1f3b1dd46ad6557a17.woff2",
     "index.html": "/secureChat/index.html",
     "main.37a2838d.css.map": "/secureChat/static/css/main.37a2838d.css.map",
-    "main.73d6306e.js.map": "/secureChat/static/js/main.73d6306e.js.map",
+    "main.b35ee618.js.map": "/secureChat/static/js/main.b35ee618.js.map",
     "787.cda612ba.chunk.js.map": "/secureChat/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.37a2838d.css",
-    "static/js/main.73d6306e.js"
+    "static/js/main.b35ee618.js"
   ]
 }
